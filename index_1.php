@@ -1,9 +1,13 @@
 <?php
-class player
+
+//final keyword prevents class from being overided by child file
+final class player
 {
 public $username;
-protected $password ;
+protected $password;
 public $email;
+public static $minPassLength = 5;
+
 
     function __construct($username)
     {
@@ -19,15 +23,101 @@ public $email;
     {
        $this->username = $newuser;
     }
-}
-class staff extends player
-{
-protected function set_name($username, $newuser)
-{
-    if($username == 'EricCoolKid123')
+
+    public static function validatePassword($password)
     {
-        $this->username = $newuser;
+    if(strlen($password) >= self::$minPassLength )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
     }
 }
+
+abstract class Character
+{
+
+    public $hero;
+    public $KDratio;
+
+    public function describe()
+    {
+        return ' your K/D ratio with '. $this->hero. ' is ' .$this->KDratio;
+    }
+
+    abstract public function bestHero();
+
+
+
 }
-?>
+
+class Offense extends Character
+{
+    public function describe()
+    {
+        return parent::describe();
+    }
+
+    public function bestHero()
+    {
+        return "Your best hero in this class is ". $this->hero;
+    }
+}
+
+class Defense extends Character
+{
+    public function describe()
+    {
+        return parent::describe();
+    }
+
+    public function bestHero()
+    {
+        return "Your best hero in this class is ". $this->hero;
+    }
+}
+
+
+class Tank extends Character
+{
+    public function describe()
+    {
+        return parent::describe();
+    }
+
+    public function bestHero()
+    {
+        return "Your best hero in this class is ". $this->hero;
+    }
+}
+
+class Support extends Character
+{
+    public function describe()
+    {
+        return parent::describe();
+    }
+
+    public function bestHero()
+    {
+        return "Your best hero in this class is ". $this->hero;
+    }
+}
+
+
+
+//class staff extends player
+//{
+//protected function set_name($username, $newuser)
+//{
+//    if($username == 'EricCoolKid123')
+//    {
+//        $this->username = $newuser;
+//    }
+//}
+//}
+//?>
